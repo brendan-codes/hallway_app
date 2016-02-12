@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+    <a href="/">Home</a> | <a href="/update">Update</a><br>
+
+    <h2>Add a start date!</h2>
+
+    <% for(var cohort of cohorts ) { %>
+
+      <p> <%= cohort.date %> </p>
+
+    <% } %>
+
+    <form action="/cohorts/new" method="post">
+      <input type='date' name='date'>
+      <input type='submit'>
+    </form>
+
+  </body>
+</html>

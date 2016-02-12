@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <p><a href="/update">Update</a> | <a href="/cohorts">Cohorts</a></p><br>
+
+    <% for(var student of students ) { %>
+
+      <div style='display:inline-block'>
+        <img src="<%= student.img %>" alt="" style='width: 200px; height: 200px'/><br>
+        <b> Name: <%= student.name %> </b>  <br>
+        <b> Start Date: <%= student.cohort %> </b> <br>
+          <hr>
+      </div>
+
+
+    <% } %>
+
+
+  </body>
+</html>
