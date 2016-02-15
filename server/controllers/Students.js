@@ -10,7 +10,7 @@ module.exports = (function(){
           if(err){
             console.log('fucked');
           }else{
-            res.render('index', {students: all_students})
+            res.json({students: all_students})
           }
         })
       },
@@ -24,7 +24,7 @@ module.exports = (function(){
                 res.end('ff');
               }else{
                 //console.log({student: student, cohorts: cohorts});
-                res.render('update', {student: student, cohorts: cohorts});
+                res.json({student: student, cohorts: cohorts});
               }
             })
           }else{
@@ -43,6 +43,12 @@ module.exports = (function(){
           }
         })
 
+
+      },
+      json_one_with_id: function(req, res){
+
+      },
+      json_all_with_bb: function(req, res){
 
       }
 
