@@ -7,6 +7,7 @@ var express    = require('express'),
 app.use(express.static(path.join(__dirname + '/client')));
 app.use(express.static(path.join(__dirname + '/images')));
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 
 
 
