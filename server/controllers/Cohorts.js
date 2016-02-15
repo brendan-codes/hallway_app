@@ -8,19 +8,31 @@ module.exports = (function(){
         if(err){
           console.log('messed');
         }else{
-          res.render('cohorts', {cohorts: cohorts});
+          res.json(cohorts);
         }
       })
     },
     new_cohort: function(req, res){
-      var new_cohort = new Cohort(req.body);
-      new_cohort.save(function(err){
-        if(err){
-          console.log('still messed');
-        }else{
-          res.redirect('/cohorts');
-        }
-      })
+      if(req.body.date === undefined){
+        console.log('fail, need start date');
+        res.json({error: 'You must enter a start date!'});
+      }else{
+        Cohort.findOne({date: req.body.date}, function(err, data){
+          if(data === null){
+            console.log('saving');
+            var new_cohort = new Cohort(req.body);
+            new_cohort.save(function(err){
+              if(err){
+                console.log('still messed');
+              }else{
+                res.redirect('/cohorts');
+              }
+            });
+          }else{
+            res.json({error: 'That cohort exists, dummy!'})
+          }
+        })
+      }
     }
   }
 })();

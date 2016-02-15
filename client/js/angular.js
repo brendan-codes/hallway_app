@@ -24,14 +24,15 @@ myApp.factory('StudentsFactory', function($http){
   };
 
 
-  factory.get_cohorts = function(data, callback){
+  factory.get_cohorts = function(callback){
     $http.get('/cohorts').success(function(output){
       callback(output);
     })
   };
 
   factory.add_cohort = function(data, callback){
-    $http.post('/cohort/add').success(function(output){
+    $http.post('/cohort/add', data).success(function(output){
+      console.log(output);
       callback(output);
     })
   }
@@ -48,4 +49,18 @@ myApp.factory('StudentsFactory', function($http){
 
 myApp.controller('StudentsController', function($scope, StudentsFactory){
 
+  StudentsFactory.get_cohorts(function(data){
+    $scope.cohorts = data;
+  })
+
+  $scope.addCohort = function(){
+    StudentsFactory.add_cohort($scope.new_cohort, function(data){
+      if(data.error){
+        $scope.error = data.error;
+      }else{
+        $scope.cohorts = data;
+        $scope.error = undefined;
+      }
+    })
+  }
 })

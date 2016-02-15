@@ -20,12 +20,11 @@ module.exports = function(app){
 
   app.get('/cohorts', function(req, res){
 
-    res.end();
+    Cohorts.index(req, res);
   })
 
-  app.get('/cohort/add', function(req, res){
-
-    res.end();
+  app.post('/cohort/add', function(req, res){
+    Cohorts.new_cohort(req, res);
   })
   // app.get('/', function (req, res){
   //   Students.get_all(req, res);

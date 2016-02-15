@@ -1,6 +1,16 @@
 <div ng-controller='StudentsController'>
+  <a href='#/update'>Update Students</a> || <a href='#/main'>Student Dashboard</a>
+  <hr>
 
+  <b><p ng-bind='error'></p></b>
 
+  <div ng-repeat='cohort in cohorts'>
+    <li ng-bind="cohort.date | date:'MMMM dd, yyyy'"></li>
+  </div>
 
+  <form>
+    Start Date: <input type='date' ng-model='new_cohort.date'>
+    <input type='submit' ng-click='addCohort()' value='Add Cohort'>
+  </form>
 
 </div>
