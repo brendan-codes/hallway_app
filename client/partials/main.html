@@ -1,7 +1,13 @@
 <div ng-controller='StudentsController'>
   <a href='#/update'>Update Students</a> || <a href='#/cohort'>Manage Cohorts</a>
   <hr>
+  <h1>Current Students!</h1>
 
+  <div ng-repeat='student in students'>
+
+    <li ng-bind='student.name'></li>
+
+  </div>
 
 
 </div>

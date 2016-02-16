@@ -5,12 +5,13 @@ var Cohort = mongoose.model('Cohort');
 module.exports = (function(){
 
     return {
-      get_all: function(req, res){
+      index: function(req, res){
         Student.find({needs_info: false}, function(err, all_students){
           if(err){
             console.log('fucked');
           }else{
-            res.json({students: all_students})
+            console.log(all_students);
+            res.json(all_students)
           }
         })
       },
@@ -18,17 +19,12 @@ module.exports = (function(){
         Student.findOne({needs_info: true}, function(err, student){
           if(err){
             console.log('all gunked to hell')
-          }if(student){
-            Cohort.find({}, function(err, cohorts){
-              if(err){
-                res.end('ff');
-              }else{
-                //console.log({student: student, cohorts: cohorts});
-                res.json({student: student, cohorts: cohorts});
-              }
-            })
+            res.end();
+          }else if(student){
+            console.log(student);
+            res.json(student);
           }else{
-            res.redirect('/');
+            res.json({flash: 'No more students to update!'});
           }
         })
       },

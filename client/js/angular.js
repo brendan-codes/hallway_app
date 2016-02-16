@@ -3,6 +3,7 @@ var myApp = angular.module('myApp', ['ngRoute']);
 myApp.config(function ($routeProvider){
   $routeProvider
   .when('/', {templateUrl: 'partials/main.html'})
+  .when('/student/:id', {templateUrl: 'partials/student.html'})
   .when('/update', {templateUrl: 'partials/update.html'})
   .when('/cohort', {templateUrl: 'partials/cohort.html'})
   .otherwise({redirectTo: '/'})
@@ -13,6 +14,7 @@ myApp.factory('StudentsFactory', function($http){
 
   factory.get_all_students = function(callback){
     $http.get('/students').success(function(output){
+      console.log(output);
       callback(output);
     })
   };
@@ -49,8 +51,23 @@ myApp.factory('StudentsFactory', function($http){
 
 myApp.controller('StudentsController', function($scope, StudentsFactory){
 
+  StudentsFactory.get_all_students(function(data){
+    console.log(data);
+    $scope.students = data;
+  })
+
   StudentsFactory.get_cohorts(function(data){
     $scope.cohorts = data;
+  })
+
+  StudentsFactory.get_one_without_info(function(data){
+    if(data.name){
+      $scope.student_sans = data;
+    }else if(data.flash){
+      $scope.flash = data.flash;
+    }else{
+      console.log('Fucked');
+    }
   })
 
   $scope.addCohort = function(){

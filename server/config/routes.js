@@ -5,12 +5,14 @@ module.exports = function(app){
 
   app.get('/students', function(req, res){
 
-    res.end();
+    Students.index(req, res);
+
+
   })
 
   app.get('/student', function(req, res){
 
-    res.end();
+    Students.get_one_for_info(req, res);
   })
 
   app.get('/student/update', function(req, res){
