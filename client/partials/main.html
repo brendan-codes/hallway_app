@@ -3,9 +3,11 @@
   <hr>
   <h1>Current Students!</h1>
 
-  <div ng-repeat='student in students'>
+  <div ng-repeat='student in students' style='display: inline-block'>
 
-    <li ng-bind='student.name'></li>
+      <img src='{{ student.img }}' style='width: 200px; height: 200px' />
+      <li ng-bind='student.name'></li>
+      <li ng-bind="student.cohort | date:'MMM d - yyyy'"></li>
 
   </div>
 
