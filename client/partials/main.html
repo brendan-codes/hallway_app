@@ -2,12 +2,18 @@
   Student Dashboard | <a href='#/update'>Update Students</a> | <a href='#/cohort'>Manage Cohorts</a>
   <hr>
 
-  <div ng-repeat='student in students' style='display: inline-block'>
-      <a href='#/student/{{ student._id }}'><img ng-src='{{ student.img }}' style='width: 170px; height: 170px' /></a>
-      <li ng-bind='student.name'></li>
-      <li ng-bind="student.cohort | date:'MMM d - yyyy'"></li>
-
-  </div>
+    <div class='row'>
+      <div class="ten columns">
+        <div class='student_box' ng-repeat='student in students' style='display: inline-block'>
+            <a href='#/student/{{ student._id }}'><img ng-src='{{ student.img }}' style='width: 150px; height: 150px' /></a>
+            <p ng-bind='student.name'></p>
+        </div>
+      </div>
+      <div class='two columns'>
+        <h2>Oppertunities</h2>
+        <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      </div>
+    </div>
 
 
 </div>
