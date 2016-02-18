@@ -10,12 +10,17 @@ module.exports = function(app){
 
   })
 
+  app.get('/student/:_id', function(req, res){
+    console.log(req.params);
+    Students.get_one_with_id(req, res);
+  })
+
   app.get('/student', function(req, res){
 
     Students.get_one_for_info(req, res);
   })
 
-  app.get('/student/update', function(req, res){
+  app.post('/student/update', function(req, res){
 
     res.end();
   })

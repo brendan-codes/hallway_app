@@ -1,8 +1,7 @@
 <div ng-controller='StudentsController'>
-  <a href='#/update'>Update Students</a> || <a href='#/main'>Student Dashboard</a>
+  <a href='#/main'>Student Dashboard</a> | <a href='#/update'>Update Students</a> | Manage Cohorts
   <hr>
-  <h1>Add/Remove Cohorts</h1>
-  <p>To remove cohorts, use mongo terminal</p>
+  To remove cohorts, use mongo terminal!
   <b><p ng-bind='error'></p></b>
 
   <div ng-repeat='cohort in cohorts'>

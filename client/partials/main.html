@@ -1,11 +1,9 @@
-<div ng-controller='StudentsController'>
-  <a href='#/update'>Update Students</a> || <a href='#/cohort'>Manage Cohorts</a>
+<div ng-controller='DashboardController'>
+  Student Dashboard | <a href='#/update'>Update Students</a> | <a href='#/cohort'>Manage Cohorts</a>
   <hr>
-  <h1>Current Students!</h1>
 
   <div ng-repeat='student in students' style='display: inline-block'>
-
-      <img src='{{ student.img }}' style='width: 200px; height: 200px' />
+      <a href='#/student/{{ student._id }}'><img ng-src='{{ student.img }}' style='width: 170px; height: 170px' /></a>
       <li ng-bind='student.name'></li>
       <li ng-bind="student.cohort | date:'MMM d - yyyy'"></li>
 

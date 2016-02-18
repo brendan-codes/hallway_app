@@ -10,7 +10,7 @@ module.exports = (function(){
           if(err){
             console.log('fucked');
           }else{
-            console.log(all_students);
+          //  console.log(all_students);
             res.json(all_students)
           }
         })
@@ -21,7 +21,7 @@ module.exports = (function(){
             console.log('all gunked to hell')
             res.end();
           }else if(student){
-            console.log(student);
+          //  console.log(student);
             res.json(student);
           }else{
             res.json({flash: 'No more students to update!'});
@@ -41,7 +41,16 @@ module.exports = (function(){
 
 
       },
-      json_one_with_id: function(req, res){
+      get_one_with_id: function(req, res){
+        Student.findOne({_id: req.params._id}, function(err, student){
+          if(err){
+            console.log(err);
+            res.end('darn');
+          }else{
+            console.log(student);
+            res.json(student);
+          }
+        })
 
       },
       json_all_with_bb: function(req, res){

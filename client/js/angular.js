@@ -3,13 +3,13 @@ var myApp = angular.module('myApp', ['ngRoute']);
 myApp.config(function ($routeProvider){
   $routeProvider
   .when('/', {templateUrl: 'partials/main.html'})
-  .when('/student/:id', {templateUrl: 'partials/student.html'})
+  .when('/student/:_id', {templateUrl: 'partials/student.html'})
   .when('/update', {templateUrl: 'partials/update.html'})
   .when('/cohort', {templateUrl: 'partials/cohort.html'})
   .otherwise({redirectTo: '/'})
 });
 
-myApp.factory('StudentsFactory', function($http){
+myApp.factory('MainFactory', function($http){
   var factory = {};
 
   factory.get_all_students = function(callback){
@@ -45,22 +45,46 @@ myApp.factory('StudentsFactory', function($http){
     })
   };
 
+  factory.get_one_with_id = function(data, callback){
+    console.log(data);
+    $http.get('/student/' + data._id).success(function(output){
+      callback(output);
+    })
+  };
+
 
   return factory;
 })
 
-myApp.controller('StudentsController', function($scope, StudentsFactory){
+myApp.controller('DashboardController', function($scope, MainFactory){
 
-  StudentsFactory.get_all_students(function(data){
+  MainFactory.get_all_students(function(data){
     console.log(data);
     $scope.students = data;
   })
 
-  StudentsFactory.get_cohorts(function(data){
+})
+
+myApp.controller('StudentController', function($scope, $routeParams, MainFactory){
+
+  MainFactory.get_one_with_id({_id: $routeParams._id}, function(data){
+    $scope.student = data;
+  })
+
+})
+
+myApp.controller('StudentsController', function($scope, MainFactory){
+
+  // MainFactory.get_all_students(function(data){
+  //   console.log(data);
+  //   $scope.students = data;
+  // })
+
+  MainFactory.get_cohorts(function(data){
     $scope.cohorts = data;
   })
 
-  StudentsFactory.get_one_without_info(function(data){
+  MainFactory.get_one_without_info(function(data){
     if(data.name){
       $scope.student_sans = data;
     }else if(data.flash){
@@ -71,7 +95,7 @@ myApp.controller('StudentsController', function($scope, StudentsFactory){
   })
 
   $scope.addCohort = function(){
-    StudentsFactory.add_cohort($scope.new_cohort, function(data){
+    MainFactory.add_cohort($scope.new_cohort, function(data){
       if(data.error){
         $scope.error = data.error;
       }else{
