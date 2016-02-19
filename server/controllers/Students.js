@@ -21,7 +21,7 @@ module.exports = (function(){
             console.log('all gunked to hell')
             res.end();
           }else if(student){
-            console.log(student);
+            //console.log(student);
             res.json(student);
           }else{
             res.json({flash: 'No more students to update!'});
@@ -29,13 +29,13 @@ module.exports = (function(){
         })
       },
       update_one_with_id: function(req, res){
-        Student.update({_id: req.params.id}, {name: req.body.name, cohort: req.body.cohort, needs_info: false}, function(err, updated_student){
+        Student.update({_id: req.body._id}, {name: req.body.name, cohort: req.body.cohort, needs_info: false, first_stack: {stack: req.body.first_stack}}, function(err, updated_student){
           if(err){
             console.log(err);
             res.end('fuuuu');
           }else{
-            console.log(updated_student);
-            res.redirect('/update');
+            //console.log(updated_student);
+            res.redirect('/student');
           }
         })
 

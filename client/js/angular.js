@@ -65,7 +65,7 @@ myApp.controller('DashboardController', function($scope, MainFactory){
 
 })
 
-myApp.controller('StudentController', function($scope, $routeParams, $location, MainFactory){
+myApp.controller('StudentController', function($scope, $routeParams, MainFactory){
 
   if($routeParams._id){
     MainFactory.get_one_with_id({_id: $routeParams._id}, function(data){
@@ -77,6 +77,12 @@ myApp.controller('StudentController', function($scope, $routeParams, $location, 
 
 myApp.controller('UpdateController', function($scope, MainFactory){
 
+  MainFactory.get_cohorts(function(data){
+    console.log(data);
+    $scope.cohorts = data;
+  })
+
+
   MainFactory.get_one_without_info(function(data){
     if(data.img){
       $scope.student = data;
@@ -86,19 +92,27 @@ myApp.controller('UpdateController', function($scope, MainFactory){
       console.log('Fucked');
     }
   })
+
+  $scope.updateStudent = function(id){
+    $scope.updated_student._id = id;
+    console.log($scope.updated_student);
+    MainFactory.update_one_with_id($scope.updated_student, function(data){
+      if(data.img){
+        //console.log(data);
+        $scope.student = data;
+        $scope.updated_student.name = '';
+      }else if(data.flash){
+        $scope.flash = data.flash;
+      }else{
+        console.log('Fucked');
+      }
+    })
+
+  }
+
 })
 
 myApp.controller('StudentsController', function($scope, MainFactory){
-
-  // MainFactory.get_all_students(function(data){
-  //   console.log(data);
-  //   $scope.students = data;
-  // })
-
-  MainFactory.get_cohorts(function(data){
-    $scope.cohorts = data;
-  })
-
 
   $scope.addCohort = function(){
     MainFactory.add_cohort($scope.new_cohort, function(data){

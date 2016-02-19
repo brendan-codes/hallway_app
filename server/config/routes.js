@@ -16,7 +16,7 @@ module.exports = function(app){
   })
 
   app.post('/student/update', function(req, res){
-    Student.update_one_with_id(req, res);
+    Students.update_one_with_id(req, res);
   })
 
   app.get('/cohorts', function(req, res){

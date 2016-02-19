@@ -1,13 +1,33 @@
 <div ng-controller='UpdateController'>
-  <a href='#/main'>Student Dashboard</a> | Update Students | <a href='#/cohort'>Manage Cohorts</a>
-  <hr>
 
-  <div class='student_box' style='display: inline-block'>
-      <img ng-src='{{ student.img }}' style='width: 125px; height: 125px' />
-      <p ng-bind='student.name'></p>
+  <div class='row'>
+    <div class='one column'>
+      <div class='student_box' style='display: inline-block'>
+          <img ng-src='{{ student.img }}' style='width: 200px; height: 200px' />
+          <p ng-bind='student.name'></p>
+      </div>
+      </form>
+        <input type='text' ng-model='updated_student.name'>
+        <select ng-model='updated_student.first_stack'>
+          <option value='' selected disabled>First Stack?</option>
+          <option>LAMP</option>
+          <option>Python</option>
+          <option>iOS</option>
+          <option>Ruby on Rails</option>
+          <option>MEAN</option>
+        </select>
+        <select ng-model='updated_student.cohort'>
+          <option value='' selected disabled>Start Date</option>
+          <option ng-repeat='cohort in cohorts'>{{ cohort.date }}</option>
+        </select>
+
+        <input ng-disabled='!updated_student.cohort || !updated_student.first_stack || !updated_student.name' type='submit' ng-click='updateStudent(student._id)'>
+      </form>
+      <p> {{ flash }} </p>
+    </div>
   </div>
 
-  <p> {{ flash }} </p>
-
+  <a href='#/main'>Student Dashboard</a> | Update Students | <a href='#/cohort'>Manage Cohorts</a>
+  <hr>
 
 </div>
