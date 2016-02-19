@@ -1,8 +1,11 @@
-<div ng-controller='StudentsController'>
+<div ng-controller='UpdateController'>
   <a href='#/main'>Student Dashboard</a> | Update Students | <a href='#/cohort'>Manage Cohorts</a>
   <hr>
 
-  <p>{{ student_sans.name }}</p>
+  <div class='student_box' style='display: inline-block'>
+      <img ng-src='{{ student.img }}' style='width: 125px; height: 125px' />
+      <p ng-bind='student.name'></p>
+  </div>
 
   <p> {{ flash }} </p>
 

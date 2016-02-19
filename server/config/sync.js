@@ -13,7 +13,7 @@ fs.readdirSync(img_path).forEach(function(file){
       if(!student){
         var new_student = new Student({img: file, needs_info: true, name: '', cohort: ''});
         new_student.save(function(err){
-          console.log('test')
+          console.log('Image added')
         })
       }
     })

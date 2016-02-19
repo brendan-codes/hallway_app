@@ -12,7 +12,7 @@ module.exports = function(app){
   })
 
   app.get('/student', function(req, res){
-    Students.get_one_for_info(req, res);
+    Students.get_one_without_info(req, res);
   })
 
   app.post('/student/update', function(req, res){

@@ -22,6 +22,7 @@ myApp.factory('MainFactory', function($http){
 
   factory.get_one_without_info = function(callback){
     $http.get('/student').success(function(output){
+      console.log(output);
       callback(output);
     })
   };
@@ -74,6 +75,19 @@ myApp.controller('StudentController', function($scope, $routeParams, $location, 
 
 })
 
+myApp.controller('UpdateController', function($scope, MainFactory){
+
+  MainFactory.get_one_without_info(function(data){
+    if(data.img){
+      $scope.student = data;
+    }else if(data.flash){
+      $scope.flash = data.flash;
+    }else{
+      console.log('Fucked');
+    }
+  })
+})
+
 myApp.controller('StudentsController', function($scope, MainFactory){
 
   // MainFactory.get_all_students(function(data){
@@ -85,15 +99,6 @@ myApp.controller('StudentsController', function($scope, MainFactory){
     $scope.cohorts = data;
   })
 
-  MainFactory.get_one_without_info(function(data){
-    if(data.name){
-      $scope.student_sans = data;
-    }else if(data.flash){
-      $scope.flash = data.flash;
-    }else{
-      console.log('Fucked');
-    }
-  })
 
   $scope.addCohort = function(){
     MainFactory.add_cohort($scope.new_cohort, function(data){

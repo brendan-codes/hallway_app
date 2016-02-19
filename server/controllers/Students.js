@@ -15,13 +15,13 @@ module.exports = (function(){
           }
         })
       },
-      get_one_for_info: function(req, res){
+      get_one_without_info: function(req, res){
         Student.findOne({needs_info: true}, function(err, student){
           if(err){
             console.log('all gunked to hell')
             res.end();
           }else if(student){
-          //  console.log(student);
+            console.log(student);
             res.json(student);
           }else{
             res.json({flash: 'No more students to update!'});
