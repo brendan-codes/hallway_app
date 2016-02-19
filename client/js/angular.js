@@ -9,6 +9,7 @@ myApp.config(function ($routeProvider){
   .otherwise({redirectTo: '/'})
 });
 
+
 myApp.factory('MainFactory', function($http){
   var factory = {};
 
@@ -46,7 +47,6 @@ myApp.factory('MainFactory', function($http){
   };
 
   factory.get_one_with_id = function(data, callback){
-    console.log(data);
     $http.get('/student/' + data._id).success(function(output){
       callback(output);
     })
@@ -59,17 +59,18 @@ myApp.factory('MainFactory', function($http){
 myApp.controller('DashboardController', function($scope, MainFactory){
 
   MainFactory.get_all_students(function(data){
-    console.log(data);
     $scope.students = data;
   })
 
 })
 
-myApp.controller('StudentController', function($scope, $routeParams, MainFactory){
+myApp.controller('StudentController', function($scope, $routeParams, $location, MainFactory){
 
-  MainFactory.get_one_with_id({_id: $routeParams._id}, function(data){
-    $scope.student = data;
-  })
+  if($routeParams._id){
+    MainFactory.get_one_with_id({_id: $routeParams._id}, function(data){
+      $scope.student = data;
+    })
+  }
 
 })
 
