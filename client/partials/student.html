@@ -2,9 +2,107 @@
   <a href='#/main'>Student Dashboard</a> | <a href='#/update'>Update Students</a> | <a href='#/cohort'>Manage Cohorts</a>
   <hr>
 
-  <p ng-bind='student.name'></p>
+  <div class='row'>
+    <div class='two column'>
+      <!-- <div class='student_box' style='display: inline-block'> -->
+          <img ng-src='{{ student.img }}' style='width: 200px; height: 200px' />
+          <br>
+          Black Belt? <input type="checkbox" ng-model='student.black_belt' ng-click='changeBelt()' ><br>
+          <!-- <li> Name - <span ng-bind='student.name'></span></li>
+          <li> Start - <span ng-bind='student.cohort | date: MM'></span></li>
+          <li> First Stack - <span ng-bind='student.first_stack.stack'></span></li>
+          <li> Belt? - <span ng-bind='student.first_stack.stack'></span></li>
+          <li> Start - <span ng-bind='student.cohort | date: MM'></span></li>
+          <li> Start - <span ng-bind='student.cohort | date: MM'></span></li> -->
+      <!-- </div> -->
+      <table>
+        <tr>
+          <td>Name:</td>
+          <td ng-bind='student.name'></td>
+          <td><input type='text' ng-model='student.name'></td>
+          <td><input type='submit' value='Update!'></td>
+        </tr>
+        <tr>
+          <td>Start Date:</td>
+          <td ng-bind='student.cohort | date: MM'></td>
+          <td>
+            <select ng-model='student.cohort'>
+              <option value='' selected disabled>Start Date</option>
+              <option ng-repeat='cohort in cohorts'>{{ cohort.date | date: MM }}</option>
+            </select>
+          </td>
+          <td><input type='submit' value='Update!'></td>
+        </tr>
+        <tr>
+          <td>First Stack:</td>
+          <td ng-bind='student.first_stack.stack'></td>
+          <td>
+            <select ng-model='student.first_stack.stack'>
+              <option value='' selected disabled>First Stack?</option>
+              <option>LAMP</option>
+              <option>Python</option>
+              <option>iOS</option>
+              <option>Ruby on Rails</option>
+              <option>MEAN</option>
+            </select>
+          </td>
+          <td><input type='submit' value='Update!'></td>
+        </tr>
+        <tr>
+          <td>Second Stack:</td>
+          <td ng-bind='student.second_stack.stack'></td>
+          <td>
+            <select ng-model='student.second_stack.stack'>
+              <option value='' selected disabled>First Stack?</option>
+              <option>LAMP</option>
+              <option>Python</option>
+              <option>iOS</option>
+              <option>Ruby on Rails</option>
+              <option>MEAN</option>
+            </select>
+          </td>
+          <td><input type='submit' value='Update!'></td>
+        </tr>
+        <tr>
+          <td>Third Stack:</td>
+          <td ng-bind='student.third_stack.stack'></td>
+          <td>
+            <select ng-model='student.third_stack.stack'>
+              <option value='' selected disabled>First Stack?</option>
+              <option>LAMP</option>
+              <option>Python</option>
+              <option>iOS</option>
+              <option>Ruby on Rails</option>
+              <option>MEAN</option>
+            </select>
+          </td>
+          <td><input type='submit' value='Update!'></td>
+        </tr>
 
-  <img ng-src='{{ student.img }}' />
+      </table>
+        <!-- Update Name: <input type='text' ng-model='student.name'>
+        <select ng-model='updated_student.first_stack'>
+          <option value='' selected disabled>First Stack?</option>
+          <option>LAMP</option>
+          <option>Python</option>
+          <option>iOS</option>
+          <option>Ruby on Rails</option>
+          <option>MEAN</option>
+        </select>
+        <p ng-if='student'>Testing</p>
+        <p ng-if='!student'>Testing2</p>
+        <p ng-if='apple'>Testing 3</p>
+        <select ng-model='updated_student.cohort'>
+          <option value='' selected disabled>Start Date</option>
+          <option ng-repeat='cohort in cohorts'>{{ cohort.date }}</option>
+        </select> -->
+
+        <!-- <input ng-disabled='!updated_student.cohort || !updated_student.first_stack || !updated_student.name' type='submit' ng-click='updateStudent(student._id)'>
+      </form> -->
+      <p> {{ flash }} </p>
+    </div>
+  </div>
+
 
 
 </div>

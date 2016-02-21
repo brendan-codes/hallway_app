@@ -5,18 +5,18 @@ var StudentSchema = new mongoose.Schema({
   name: String,
   cohort: String,
   first_stack:  {
-                  month: String,
                   stack: String,
+                  month: String,
                   belt:  String
                 },
   second_stack: {
-                  month: String,
                   stack: String,
+                  month: String,
                   belt:  String,
                 },
   third_stack:  {
-                  month: String,
                   stack: String,
+                  month: String,
                   belt:  String
                 },
   black_belt: String,

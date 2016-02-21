@@ -9,6 +9,18 @@ myApp.config(function ($routeProvider){
   .otherwise({redirectTo: '/'})
 });
 
+myApp.factory('UpdateFactory', function($http){
+  var factory = {};
+
+  factory.change_black_belt_status = function(data, callback){
+    console.log(data);
+  }
+
+
+
+  return factory;
+})
+
 
 myApp.factory('MainFactory', function($http){
   var factory = {};
@@ -65,10 +77,25 @@ myApp.controller('DashboardController', function($scope, MainFactory){
 
 })
 
-myApp.controller('StudentController', function($scope, $routeParams, MainFactory){
+myApp.controller('StudentController', function($scope, $routeParams, MainFactory, UpdateFactory){
+
+  $scope.required = true;
+
+  MainFactory.get_cohorts(function(data){
+    //console.log(data);
+    $scope.cohorts = data;
+  })
+
+  $scope.changeBelt = function(){
+    console.log($scope.student)
+    //UpdateFactory.change_black_belt_status($scope.updated_student)
+  }
+
+
 
   if($routeParams._id){
     MainFactory.get_one_with_id({_id: $routeParams._id}, function(data){
+      console.log(data);
       $scope.student = data;
     })
   }
