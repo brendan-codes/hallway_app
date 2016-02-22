@@ -13,7 +13,8 @@ myApp.factory('UpdateFactory', function($http){
   var factory = {};
 
   factory.change_black_belt_status = function(data, callback){
-    console.log(data);
+    //console.log(data);
+    callback(data);
   }
 
 
@@ -87,8 +88,10 @@ myApp.controller('StudentController', function($scope, $routeParams, MainFactory
   })
 
   $scope.changeBelt = function(){
-    console.log($scope.student)
-    //UpdateFactory.change_black_belt_status($scope.updated_student)
+  //  console.log($scope.student)
+    UpdateFactory.change_black_belt_status($scope.updated_student, function(data){
+      console.log('Coming back with data');
+    })
   }
 
 
