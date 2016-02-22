@@ -14,10 +14,8 @@ myApp.factory('UpdateFactory', function($http){
 
   factory.change_black_belt_status = function(data, callback){
     //console.log(data);
-    callback(data);
+    //callback(data);
   }
-
-
 
   return factory;
 })
