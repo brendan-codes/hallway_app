@@ -17,7 +17,13 @@ module.exports = (function(){
     },
 
     update_blast: function(req, res){
-      res.end();
+      Blast.update({_id: req.body._id}, req.body, function (err, blast){
+        if(err){
+          console.log('asdjaljsd');
+        }else{
+          res.json(blast);
+        }
+      })
     }
   };
 

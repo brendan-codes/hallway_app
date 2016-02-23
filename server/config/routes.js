@@ -9,7 +9,7 @@ module.exports = function(app){
   })
 
   app.post('/blasts/update', function(req, res){
-    Blast.update_blast(req, res);
+    Blasts.update_blast(req, res);
   })
 
   app.get('/students', function(req, res){

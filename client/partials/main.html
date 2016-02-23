@@ -1,5 +1,5 @@
 <div ng-controller='DashboardController'>
-  Student Dashboard | <a href='#/update'>Update Students</a> | <a href='#/cohort'>Manage Cohorts</a>
+  Student Dashboard | <a href='#/update'>Update Students</a> | <a href='#/cohort'>Manage Cohorts</a> | <a href='#/blast'>Change Blast</a>
   <hr>
 
     <div class='row'>
@@ -11,7 +11,7 @@
       </div>
       <div class='two columns'>
         <h2>Opportunities</h2>
-        <p ng-bind='blast.text'></p>
+        <p ng-bind-html='blast.text'></p>
         </div>
     </div>
 

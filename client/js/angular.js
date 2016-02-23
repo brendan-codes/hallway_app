@@ -75,6 +75,12 @@ myApp.factory('MainFactory', function($http){
     })
   }
 
+  factory.update_blast = function(data, callback){
+    $http.post('/blasts/update', data).success(function(output){
+      callback(data);
+    })
+  }
+
 
   return factory;
 })
@@ -85,6 +91,12 @@ myApp.controller('BlastController', function($scope, MainFactory){
     console.log(data);
     $scope.blast = data;
   });
+
+  $scope.changeBlast = function(){
+    MainFactory.update_blast($scope.blast, function(data){
+      $scope.blast = data;
+    })
+  }
 
 })
 
