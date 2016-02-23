@@ -6,77 +6,71 @@
     <div class='two column'>
       <!-- <div class='student_box' style='display: inline-block'> -->
           <img ng-src='{{ student.img }}' style='width: 200px; height: 200px' />
-          <br>
-          Black Belt? <input type="checkbox" ng-model='student.black_belt' ng-click='changeBelt()' ><br>
-          <!-- <li> Name - <span ng-bind='student.name'></span></li>
-          <li> Start - <span ng-bind='student.cohort | date: MM'></span></li>
-          <li> First Stack - <span ng-bind='student.first_stack.stack'></span></li>
-          <li> Belt? - <span ng-bind='student.first_stack.stack'></span></li>
-          <li> Start - <span ng-bind='student.cohort | date: MM'></span></li>
-          <li> Start - <span ng-bind='student.cohort | date: MM'></span></li> -->
-      <!-- </div> -->
       <table>
         <tr>
           <td>Name:</td>
           <td ng-bind='student.name'></td>
-          <td><input type='text' ng-model='student.name'></td>
-          <td><input type='submit' value='Update!'></td>
+          <td><input type='text' ng-model='student.name' ng-change='hasChanged()'></td>
         </tr>
         <tr>
           <td>Start Date:</td>
           <td ng-bind='student.cohort | date: MM'></td>
           <td>
-            <select ng-model='student.cohort'>
+            <select ng-model='student.cohort' ng-change='hasChanged()'>
               <option value='' selected disabled>Start Date</option>
               <option ng-repeat='cohort in cohorts'>{{ cohort.date | date: MM }}</option>
             </select>
           </td>
-          <td><input type='submit' value='Update!'></td>
         </tr>
         <tr>
           <td>First Stack:</td>
           <td ng-bind='student.first_stack.stack'></td>
           <td>
-            <select ng-model='student.first_stack.stack'>
+            <select ng-model='student.first_stack.stack' ng-change='hasChanged()'>
               <option value='' selected disabled>First Stack?</option>
               <option>LAMP</option>
               <option>Python</option>
               <option>iOS</option>
               <option>Ruby on Rails</option>
               <option>MEAN</option>
+              <option></option>
             </select>
           </td>
-          <td><input type='submit' value='Update!'></td>
         </tr>
         <tr>
           <td>Second Stack:</td>
           <td ng-bind='student.second_stack.stack'></td>
           <td>
-            <select ng-model='student.second_stack.stack'>
-              <option value='' selected disabled>First Stack?</option>
+            <select ng-model='student.second_stack.stack' ng-change='hasChanged()'>
+              <option value='' selected disabled>Second Stack?</option>
               <option>LAMP</option>
               <option>Python</option>
               <option>iOS</option>
               <option>Ruby on Rails</option>
               <option>MEAN</option>
+              <option></option>
             </select>
           </td>
-          <td><input type='submit' value='Update!'></td>
         </tr>
         <tr>
           <td>Third Stack:</td>
           <td ng-bind='student.third_stack.stack'></td>
           <td>
-            <select ng-model='student.third_stack.stack'>
-              <option value='' selected disabled>First Stack?</option>
+            <select ng-model='student.third_stack.stack' ng-change='hasChanged()'>
+              <option value='' selected disabled>Third Stack?</option>
               <option>LAMP</option>
               <option>Python</option>
               <option>iOS</option>
               <option>Ruby on Rails</option>
               <option>MEAN</option>
+              <option></option>
             </select>
           </td>
-          <td><input type='submit' value='Update!'></td>
+        </tr>
+        <tr>
+          <td>Black Belt?</td>
+          <td ng-bind='student.black_belt'></td>
+          <td><input type="checkbox" ng-model='student.black_belt' ng-click='changeBelt()' ></td>
         </tr>
 
       </table>

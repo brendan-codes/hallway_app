@@ -16,7 +16,12 @@ module.exports = function(app){
   })
 
   app.post('/student/update', function(req, res){
+    console.log(req.body);
     Students.update_one_with_id(req, res);
+  })
+
+  app.post('/student/init', function(req, res){
+    Students.initialize_student(req, res);
   })
 
   app.get('/cohorts', function(req, res){

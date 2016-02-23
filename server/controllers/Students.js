@@ -28,7 +28,7 @@ module.exports = (function(){
           }
         })
       },
-      update_one_with_id: function(req, res){
+      initialize_student: function(req, res){
         Student.update({_id: req.body._id}, {name: req.body.name, cohort: req.body.cohort, needs_info: false, first_stack: {stack: req.body.first_stack}}, function(err, updated_student){
           if(err){
             console.log(err);
@@ -53,7 +53,16 @@ module.exports = (function(){
         })
 
       },
-      json_all_with_bb: function(req, res){
+      update_one_with_id: function(req, res){
+        Student.update({_id: req.body._id}, req.body, function(err, student){
+          if(err){
+            console.log(err);
+            res.end()
+          }else{
+            console.log(student);
+            res.end();
+          }
+        })
 
       }
 

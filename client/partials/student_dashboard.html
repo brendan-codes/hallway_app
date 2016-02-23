@@ -1,11 +1,8 @@
 <div ng-controller='DashboardController'>
-  Student Dashboard | <a href='#/update'>Update Students</a> | <a href='#/cohort'>Manage Cohorts</a>
-  <hr>
-
     <div class='row'>
       <div class="ten columns">
         <div class='student_box' ng-repeat='student in students' style='display: inline-block'>
-            <a href='#/student/{{ student._id }}'><img ng-src='{{ student.img }}' style='width: 125px; height: 125px' /></a>
+            <img ng-src='{{ student.img }}' style='width: 125px; height: 125px' />
             <p ng-bind='student.name'></p>
         </div>
       </div>

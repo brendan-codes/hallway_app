@@ -18,14 +18,14 @@
         </select>
         <select ng-model='updated_student.cohort'>
           <option value='' selected disabled>Start Date</option>
-          <option ng-repeat='cohort in cohorts'>{{ cohort.date }}</option>
+          <option ng-repeat='cohort in cohorts'>{{ cohort.date | date: MM}}</option>
         </select>
 
         <input ng-disabled='!updated_student.cohort || !updated_student.first_stack || !updated_student.name' type='submit' ng-click='updateStudent(student._id)'>
       </form>
-      <p> {{ flash }} </p>
     </div>
   </div>
+  <p> {{ flash }} </p>
 
   <a href='#/main'>Student Dashboard</a> | Update Students | <a href='#/cohort'>Manage Cohorts</a>
   <hr>

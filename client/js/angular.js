@@ -3,6 +3,7 @@ var myApp = angular.module('myApp', ['ngRoute']);
 myApp.config(function ($routeProvider){
   $routeProvider
   .when('/', {templateUrl: 'partials/main.html'})
+  .when('/dashboard', {templateUrl: 'partials/student_dashboard.html'})
   .when('/student/:_id', {templateUrl: 'partials/student.html'})
   .when('/update', {templateUrl: 'partials/update.html'})
   .when('/cohort', {templateUrl: 'partials/cohort.html'})
@@ -15,6 +16,12 @@ myApp.factory('UpdateFactory', function($http){
   factory.change_black_belt_status = function(data, callback){
     //console.log(data);
     //callback(data);
+  }
+
+  factory.update_student = function(data, callback){
+    $http.post('/student/update', data).success(function(output){
+      //console.log(output);
+    })
   }
 
   return factory;
@@ -52,8 +59,8 @@ myApp.factory('MainFactory', function($http){
     })
   }
 
-  factory.update_one_with_id = function(data, callback){
-    $http.post('/student/update', data).success(function(output){
+  factory.initialize_student = function(data, callback){
+    $http.post('/student/init', data).success(function(output){
       callback(output);
     })
   };
@@ -87,16 +94,23 @@ myApp.controller('StudentController', function($scope, $routeParams, MainFactory
 
   $scope.changeBelt = function(){
   //  console.log($scope.student)
-    UpdateFactory.change_black_belt_status($scope.updated_student, function(data){
+    UpdateFactory.change_black_belt_status($scope.student, function(data){
       console.log('Coming back with data');
     })
+  }
+
+  $scope.hasChanged = function(){
+    console.log($scope.student);
+    UpdateFactory.update_student($scope.student, function(data){
+      $scope.student = data;
+    });
   }
 
 
 
   if($routeParams._id){
     MainFactory.get_one_with_id({_id: $routeParams._id}, function(data){
-      console.log(data);
+      console.log('test');
       $scope.student = data;
     })
   }
@@ -124,13 +138,14 @@ myApp.controller('UpdateController', function($scope, MainFactory){
   $scope.updateStudent = function(id){
     $scope.updated_student._id = id;
     console.log($scope.updated_student);
-    MainFactory.update_one_with_id($scope.updated_student, function(data){
+    MainFactory.initialize_student($scope.updated_student, function(data){
       if(data.img){
         //console.log(data);
         $scope.student = data;
         $scope.updated_student.name = '';
       }else if(data.flash){
         $scope.flash = data.flash;
+        $scope.student = {};
       }else{
         console.log('Fucked');
       }
@@ -142,14 +157,21 @@ myApp.controller('UpdateController', function($scope, MainFactory){
 
 myApp.controller('StudentsController', function($scope, MainFactory){
 
+  MainFactory.get_cohorts(function(data){
+    console.log(data);
+    $scope.cohorts = data;
+  })
+
   $scope.addCohort = function(){
-    MainFactory.add_cohort($scope.new_cohort, function(data){
-      if(data.error){
-        $scope.error = data.error;
-      }else{
-        $scope.cohorts = data;
-        $scope.error = undefined;
-      }
-    })
+    if($scope.new_cohort !== ''){
+      MainFactory.add_cohort($scope.new_cohort, function(data){
+        if(data.error){
+          $scope.error = data.error;
+        }else{
+          $scope.cohorts = data;
+          $scope.error = undefined;
+        }
+      })
+    }
   }
 })
