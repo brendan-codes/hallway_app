@@ -1,5 +1,6 @@
 var Students = require('./../controllers/Students.js');
 var Cohorts = require('./../controllers/Cohorts.js');
+var Blasts = require('./../controllers/Blasts.js');
 
 module.exports = function(app){
 
