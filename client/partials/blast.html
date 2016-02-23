@@ -1,0 +1,14 @@
+<div ng-controller='BlastController'>
+  <a href='#/main'>Student Dashboard</a> | <a href='#/update'>Update Students</a> | <a href='#/cohort'>Manage Cohorts</a>
+  <hr>
+
+  <p ng-bind-html='blast.text'></p>
+
+
+  <textarea ng-model='blast.text'></textarea><br>
+  <input type='submit' value='Blast it!' ng-click=''><br>
+
+  HTML is allowed on this input, please use responsibly!
+
+
+</div>

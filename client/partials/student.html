@@ -1,7 +1,6 @@
 <div ng-controller='StudentController'>
   <a href='#/main'>Student Dashboard</a> | <a href='#/update'>Update Students</a> | <a href='#/cohort'>Manage Cohorts</a>
   <hr>
-
   <div class='row'>
     <div class='two column'>
       <!-- <div class='student_box' style='display: inline-block'> -->
@@ -70,29 +69,14 @@
         <tr>
           <td>Black Belt?</td>
           <td ng-bind='student.black_belt'></td>
-          <td><input type="checkbox" ng-model='student.black_belt' ng-click='changeBelt()' ></td>
+          <td><input type="checkbox" ng-model='student.black_belt' ng-click='hasChanged()' ></td>
         </tr>
-
+        <tr>
+          <td>Residency?</td>
+          <td ng-bind='student.resident'></td>
+          <td><input type="checkbox" ng-model='student.resident' ng-click='hasChanged()' ></td>
+        </tr>
       </table>
-        <!-- Update Name: <input type='text' ng-model='student.name'>
-        <select ng-model='updated_student.first_stack'>
-          <option value='' selected disabled>First Stack?</option>
-          <option>LAMP</option>
-          <option>Python</option>
-          <option>iOS</option>
-          <option>Ruby on Rails</option>
-          <option>MEAN</option>
-        </select>
-        <p ng-if='student'>Testing</p>
-        <p ng-if='!student'>Testing2</p>
-        <p ng-if='apple'>Testing 3</p>
-        <select ng-model='updated_student.cohort'>
-          <option value='' selected disabled>Start Date</option>
-          <option ng-repeat='cohort in cohorts'>{{ cohort.date }}</option>
-        </select> -->
-
-        <!-- <input ng-disabled='!updated_student.cohort || !updated_student.first_stack || !updated_student.name' type='submit' ng-click='updateStudent(student._id)'>
-      </form> -->
       <p> {{ flash }} </p>
     </div>
   </div>

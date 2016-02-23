@@ -1,8 +1,9 @@
-var myApp = angular.module('myApp', ['ngRoute']);
+var myApp = angular.module('myApp', ['ngRoute', 'ngSanitize']);
 
 myApp.config(function ($routeProvider){
   $routeProvider
   .when('/', {templateUrl: 'partials/main.html'})
+  .when('/blast', {templateUrl: 'partials/blast.html'})
   .when('/dashboard', {templateUrl: 'partials/student_dashboard.html'})
   .when('/student/:_id', {templateUrl: 'partials/student.html'})
   .when('/update', {templateUrl: 'partials/update.html'})
@@ -12,11 +13,6 @@ myApp.config(function ($routeProvider){
 
 myApp.factory('UpdateFactory', function($http){
   var factory = {};
-
-  factory.change_black_belt_status = function(data, callback){
-    //console.log(data);
-    //callback(data);
-  }
 
   factory.update_student = function(data, callback){
     $http.post('/student/update', data).success(function(output){
@@ -30,6 +26,8 @@ myApp.factory('UpdateFactory', function($http){
 
 myApp.factory('MainFactory', function($http){
   var factory = {};
+
+  factory.super_secret_hidden_hardcoded_frontend_insecure_password = null;
 
   factory.get_all_students = function(callback){
     $http.get('/students').success(function(output){
@@ -71,33 +69,44 @@ myApp.factory('MainFactory', function($http){
     })
   };
 
+  factory.get_blast = function(callback){
+    $http.get('/blasts').success(function(output){
+      callback(output);
+    })
+  }
+
 
   return factory;
+})
+
+myApp.controller('BlastController', function($scope, MainFactory){
+
+  MainFactory.get_blast(function(data){
+    console.log(data);
+    $scope.blast = data;
+  });
+
 })
 
 myApp.controller('DashboardController', function($scope, MainFactory){
 
   MainFactory.get_all_students(function(data){
     $scope.students = data;
+  });
+
+  MainFactory.get_blast(function(data){
+    console.log(data);
+    $scope.blast = data;
   })
 
 })
 
 myApp.controller('StudentController', function($scope, $routeParams, MainFactory, UpdateFactory){
 
-  $scope.required = true;
-
   MainFactory.get_cohorts(function(data){
     //console.log(data);
     $scope.cohorts = data;
   })
-
-  $scope.changeBelt = function(){
-  //  console.log($scope.student)
-    UpdateFactory.change_black_belt_status($scope.student, function(data){
-      console.log('Coming back with data');
-    })
-  }
 
   $scope.hasChanged = function(){
     console.log($scope.student);

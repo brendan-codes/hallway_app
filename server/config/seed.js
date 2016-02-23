@@ -2,7 +2,6 @@
 // including the 'staff' and 'residents' cohorts, as well as a
 // document to save the main announcement blast.
 
-
 var mongoose = require('mongoose');
 var Blast = mongoose.model('Blast');
 var Cohort = mongoose.model('Cohort');

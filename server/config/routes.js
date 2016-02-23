@@ -4,6 +4,14 @@ var Blasts = require('./../controllers/Blasts.js');
 
 module.exports = function(app){
 
+  app.get('/blasts', function(req, res){
+    Blasts.get_blast(req, res);
+  })
+
+  app.post('/blasts/update', function(req, res){
+    Blast.update_blast(req, res);
+  })
+
   app.get('/students', function(req, res){
     Students.index(req, res);
   })
