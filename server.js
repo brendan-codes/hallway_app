@@ -16,6 +16,6 @@ require('./server/config/mongoose.js');
 require('./server/config/sync.js');
 require('./server/config/routes.js')(app);
 
-var server = app.listen(7777, function(){
-  console.log('listening on 7777');
+var server = app.listen(8000, function(){
+  console.log('listening on 8000');
 })

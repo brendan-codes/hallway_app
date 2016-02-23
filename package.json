@@ -1,4 +1,9 @@
 {
+  "name": "hallway-app",
+  "author": {
+    "name": "Brendan Stanton",
+    "email": "bstanton@codingdojo.com"
+  },
   "dependencies": {
     "body-parser": "^1.14.2",
     "ejs": "^2.4.1",
