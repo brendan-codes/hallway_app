@@ -1,3 +1,6 @@
+// Student Schema. Groundwork set for tracking each stack, belt progress,
+// and month that stack was taken.
+
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
@@ -19,7 +22,8 @@ var StudentSchema = new mongoose.Schema({
                   month: String,
                   belt:  String
                 },
-  black_belt: String,
+  black_belt: Boolean,
+  resident: Boolean,
   img: String,
   needs_info: Boolean
 })

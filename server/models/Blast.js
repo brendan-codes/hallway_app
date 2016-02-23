@@ -1,3 +1,6 @@
+// This is literally a single document collection to hold the
+// main announcement blasts.
+
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
