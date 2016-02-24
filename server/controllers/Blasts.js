@@ -15,6 +15,7 @@ module.exports = (function(){
         }
       })
     },
+    
 
     update_blast: function(req, res){
       Blast.update({_id: req.body._id}, req.body, function (err, blast){
