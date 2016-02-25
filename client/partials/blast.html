@@ -7,8 +7,10 @@
       <p ng-bind-html='blast.text'></p>
 
 
-      <textarea class='materialize-textarea' ng-model='blast.text'></textarea>
-      <input type='submit' value='Blast it!' ng-click='changeBlast()'>
+      <textarea id='textarea_custom' class='materialize-textarea' ng-model='blast.text'></textarea>
+      <button class="btn waves-effect waves-light" type='submit' value='Blast it!' ng-click='changeBlast()'>
+        Blast it!
+      </button>
 
       <p>
         HTML is allowed on this input, please use responsibly!

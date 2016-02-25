@@ -8,7 +8,6 @@
           <img ng-src='{{ student.img }}' style='width: 200px; height: 200px' />
           <p ng-bind='student.name'></p>
       </div>
-      </form>
         <input type='text' ng-model='updated_student.name'>
         <select ng-model='updated_student.first_stack'>
           <option value='' selected disabled>First Stack?</option>
@@ -24,7 +23,6 @@
         </select>
 
         <input ng-disabled='!updated_student.cohort || !updated_student.first_stack || !updated_student.name' type='submit' ng-click='updateStudent(student._id)'>
-      </form>
     </div>
   </div>
   <p> {{ flash }} </p>

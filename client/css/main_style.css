@@ -23,6 +23,10 @@
 	margin-bottom: 0px;
 }
 
+#textarea_custom {
+	font-weight: lighter;
+}
+
 option input {
 	color: black;
 }

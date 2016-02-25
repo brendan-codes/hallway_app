@@ -115,6 +115,10 @@ myApp.controller('DashboardController', function($scope, MainFactory){
 
 myApp.controller('StudentController', function($scope, $routeParams, MainFactory, UpdateFactory){
 
+  $(document).ready(function() {
+    $('select').material_select();
+  });
+
   MainFactory.get_cohorts(function(data){
     //console.log(data);
     $scope.cohorts = data;
@@ -139,6 +143,10 @@ myApp.controller('StudentController', function($scope, $routeParams, MainFactory
 })
 
 myApp.controller('UpdateController', function($scope, MainFactory){
+
+  $(document).ready(function() {
+    $('select').material_select();
+  });
 
   MainFactory.get_cohorts(function(data){
     console.log(data);

@@ -2,7 +2,7 @@
   <a href='#/main'>Student Dashboard</a> | <a href='#/update'>Update Students</a> | <a href='#/cohort'>Manage Cohorts</a>
   <hr>
   <div class='row'>
-    <div class='col s2'>
+    <div class='class="input-field col s6'>
       <!-- <div class='student_box' style='display: inline-block'> -->
           <img ng-src='{{ student.img }}' style='width: 200px; height: 200px' />
       <table>
@@ -15,7 +15,7 @@
           <td>Start Date:</td>
           <td ng-bind='student.cohort | date: MM'></td>
           <td>
-            <select ng-model='student.cohort' ng-change='hasChanged()'>
+            <select class='browser-default' ng-model='student.cohort' ng-change='hasChanged()'>
               <option value='' selected disabled>Start Date</option>
               <option ng-repeat='cohort in cohorts'>{{ cohort.date | date: MM }}</option>
             </select>
@@ -25,7 +25,7 @@
           <td>First Stack:</td>
           <td ng-bind='student.first_stack.stack'></td>
           <td>
-            <select ng-model='student.first_stack.stack' ng-change='hasChanged()'>
+            <select class='browser-default' ng-model='student.first_stack.stack' ng-change='hasChanged()'>
               <option value='' selected disabled>First Stack?</option>
               <option>LAMP</option>
               <option>Python</option>
@@ -40,7 +40,7 @@
           <td>Second Stack:</td>
           <td ng-bind='student.second_stack.stack'></td>
           <td>
-            <select ng-model='student.second_stack.stack' ng-change='hasChanged()'>
+            <select class='browser-default' ng-model='student.second_stack.stack' ng-change='hasChanged()'>
               <option value='' selected disabled>Second Stack?</option>
               <option>LAMP</option>
               <option>Python</option>
@@ -55,7 +55,7 @@
           <td>Third Stack:</td>
           <td ng-bind='student.third_stack.stack'></td>
           <td>
-            <select ng-model='student.third_stack.stack' ng-change='hasChanged()'>
+            <select class='browser-default' ng-model='student.third_stack.stack' ng-change='hasChanged()'>
               <option value='' selected disabled>Third Stack?</option>
               <option>LAMP</option>
               <option>Python</option>
@@ -69,12 +69,26 @@
         <tr>
           <td>Black Belt?</td>
           <td ng-bind='student.black_belt'></td>
-          <td><input type="checkbox" ng-model='student.black_belt' ng-click='hasChanged()' ></td>
+          <td>
+            <div class="switch">
+              <label>
+                <input type="checkbox" ng-model='student.black_belt' ng-click='hasChanged()'>
+                <span class="lever"></span>
+              </label>
+            </div>
+          </td>
         </tr>
         <tr>
           <td>Residency?</td>
           <td ng-bind='student.resident'></td>
-          <td><input type="checkbox" ng-model='student.resident' ng-click='hasChanged()' ></td>
+          <td>
+            <div class="switch">
+              <label>
+                <input type="checkbox" ng-model='student.resident' ng-click='hasChanged()'>
+                <span class="lever"></span>
+              </label>
+            </div>
+          </td>
         </tr>
       </table>
       <p> {{ flash }} </p>
