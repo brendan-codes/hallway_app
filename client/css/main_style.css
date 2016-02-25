@@ -3,17 +3,24 @@
 	color: #EBE7D9;
 }
 
-p {
+/*p {
   font-size: 14px;
-}
+}*/
 
 .student_box{
   word-wrap: break-word;
   height: 0px;
-  width: 150px;
+  width: 10%;
   margin: 2px;
   padding: 5px;
   /*border: 1px solid silver;*/
+}
+
+.blast {
+	float: right;
+	/*border: 1px solid silver;*/
+	padding: 5px;
+	margin-bottom: 0px;
 }
 
 option input {

@@ -2,17 +2,25 @@
   Student Dashboard | <a href='#/update'>Update Students</a> | <a href='#/cohort'>Manage Cohorts</a> | <a href='#/blast'>Change Blast</a>
   <hr>
 
-    <div class='row'>
-      <div class="eight columns">
-        <div class='student_box' ng-repeat='student in students' style='display: inline-block'>
-            <a href='#/student/{{ student._id }}'><img ng-src='{{ student.img }}' style='width: 125px; height: 125px' /></a>
-            <p ng-bind='student.name'></p>
+    <div>
+      <div class="row">
+        <div class='col s10' style=''>
+          <div class='clearer'>
+            <div class='student_box' ng-repeat='student in students' style='display: inline-block'>
+              <p ng-bind='student.name'></p>
+              <a href='#/student/{{ student._id }}'><img ng-src='{{ student.img }}' style='width: 100px; height: 100px' /></a>
+            </div>
+          </div>
         </div>
+        <div class='col s2'>
+          <div class='blast'>
+            <h2>Opportunities</h2>
+            <p ng-bind-html='blast.text'></p>
+          </div>
+        </div>
+      <!-- </div>
+      <div class='row'> -->
       </div>
-      <div class='four columns'>
-        <h2>Opportunities</h2>
-        <p ng-bind-html='blast.text'></p>
-        </div>
     </div>
 
 

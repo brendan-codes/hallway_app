@@ -1,14 +1,20 @@
 <div ng-controller='BlastController'>
   <a href='#/main'>Student Dashboard</a> | <a href='#/update'>Update Students</a> | <a href='#/cohort'>Manage Cohorts</a>
   <hr>
+  <div class='row'>
+    <div class="input-field col s4">
 
-  <p ng-bind-html='blast.text'></p>
+      <p ng-bind-html='blast.text'></p>
 
 
-  <textarea ng-model='blast.text'></textarea><br>
-  <input type='submit' value='Blast it!' ng-click='changeBlast()'><br>
+      <textarea class='materialize-textarea' ng-model='blast.text'></textarea>
+      <input type='submit' value='Blast it!' ng-click='changeBlast()'>
 
-  HTML is allowed on this input, please use responsibly!
+      <p>
+        HTML is allowed on this input, please use responsibly!
+      </p>
+    </div>
+  </div>
 
 
 </div>
