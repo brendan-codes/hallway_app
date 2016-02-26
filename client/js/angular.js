@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', ['ngRoute', 'ngSanitize']);
+var myApp = angular.module('myApp', ['ngRoute', 'ngSanitize', 'dndLists']);
 
 myApp.config(function ($routeProvider){
   $routeProvider
@@ -8,8 +8,19 @@ myApp.config(function ($routeProvider){
   .when('/student/:_id', {templateUrl: 'partials/student.html'})
   .when('/update', {templateUrl: 'partials/update.html'})
   .when('/cohort', {templateUrl: 'partials/cohort.html'})
+  .when('/options', {templateUrl: 'partials/options.html'})
   .otherwise({redirectTo: '/'})
 });
+
+// myApp.factory('App', function(){
+//   var factory = {};
+//
+//   factory.settings = {
+//
+//                      }
+//
+//   return factory;
+// })
 
 myApp.factory('UpdateFactory', function($http){
   var factory = {};
@@ -26,6 +37,12 @@ myApp.factory('UpdateFactory', function($http){
 
 myApp.factory('MainFactory', function($http){
   var factory = {};
+
+  factory.groups = {
+
+                    };
+
+  factory.interval = 120000;
 
   factory.super_secret_hidden_hardcoded_frontend_insecure_password = null;
 
@@ -69,6 +86,13 @@ myApp.factory('MainFactory', function($http){
     })
   };
 
+  factory.get_by_group = function(data, callback){
+    console.log(data);
+    $http.post('/cohort/date', data).success(function(output){
+      callback(ouput);
+    })
+  }
+
   factory.get_blast = function(callback){
     $http.get('/blasts').success(function(output){
       callback(output);
@@ -102,22 +126,54 @@ myApp.controller('BlastController', function($scope, MainFactory){
 
 myApp.controller('DashboardController', function($scope, MainFactory){
 
-  MainFactory.get_all_students(function(data){
-    $scope.students = data;
-  });
+  var counter;
+
+  // MainFactory.get_all_students(function(data){
+  //   $scope.students = data;
+  // });
 
   MainFactory.get_blast(function(data){
     console.log(data);
     $scope.blast = data;
   })
 
+  MainFactory.get_cohorts(function(data){
+    console.log(data);
+
+    // for(cohort in data){
+    //   console.log(data[cohort].date)
+    //   console.log(MainFactory.groups[data[cohort].date])
+    //   if(!MainFactory.groups[data[cohort].date]){
+    //     console.log('tests')
+    //     MainFactory.groups[data[cohort].date] = data[cohort].date;
+    //   }
+    // }
+    $scope.cohorts = data;
+    $scope.cohorts.unshift({date: 'black belt'})
+    // counter = $scope.cohorts.length;
+    console.log($scope.cohorts);
+    MainFactory.get_by_group($scope.cohorts[$scope.cohorts.length - 1], function(data){
+      $scope.students = data;
+    })
+  })
+
+  function cycleGroup(arr){
+    var temp = arr.pop();
+    arr.unshift(temp);
+  }
+
+
+
+
+
+
 })
 
 myApp.controller('StudentController', function($scope, $routeParams, MainFactory, UpdateFactory){
 
-  $(document).ready(function() {
-    $('select').material_select();
-  });
+  // $(document).ready(function() {
+  //   $('select').material_select();
+  // });
 
   MainFactory.get_cohorts(function(data){
     //console.log(data);
@@ -144,9 +200,9 @@ myApp.controller('StudentController', function($scope, $routeParams, MainFactory
 
 myApp.controller('UpdateController', function($scope, MainFactory){
 
-  $(document).ready(function() {
-    $('select').material_select();
-  });
+  // $(document).ready(function() {
+  //   $('select').material_select();
+  // });
 
   MainFactory.get_cohorts(function(data){
     console.log(data);
@@ -160,7 +216,7 @@ myApp.controller('UpdateController', function($scope, MainFactory){
     }else if(data.flash){
       $scope.flash = data.flash;
     }else{
-      console.log('Fucked');
+      console.log('buggered');
     }
   })
 
@@ -176,11 +232,23 @@ myApp.controller('UpdateController', function($scope, MainFactory){
         $scope.flash = data.flash;
         $scope.student = {};
       }else{
-        console.log('Fucked');
+        console.log('buggered');
       }
     })
 
   }
+
+  // $scope.rotate = function
+
+})
+
+myApp.controller('OptionsController', function($scope, MainFactory){
+
+  MainFactory.get_cohorts(function(data){
+    console.log(data);
+    $scope.cohorts = data;
+  })
+
 
 })
 

@@ -37,6 +37,11 @@ module.exports = function(app){
     Cohorts.index(req, res);
   })
 
+  app.post('/cohort/date', function(req, res){
+    console.log(req.body);
+    res.end();
+  })
+
   app.post('/cohort/add', function(req, res){
     Cohorts.new_cohort(req, res);
   })
