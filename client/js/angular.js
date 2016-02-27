@@ -89,7 +89,8 @@ myApp.factory('MainFactory', function($http){
   factory.get_by_group = function(data, callback){
     console.log(data);
     $http.post('/cohort/date', data).success(function(output){
-      callback(ouput);
+      console.log(output);
+      callback(output);
     })
   }
 
@@ -102,6 +103,12 @@ myApp.factory('MainFactory', function($http){
   factory.update_blast = function(data, callback){
     $http.post('/blasts/update', data).success(function(output){
       callback(data);
+    })
+  }
+
+  factory.get_first_group = function(callback){
+    $http.get('/cohort/first').success(function(output){
+      callback(output);
     })
   }
 
@@ -149,18 +156,39 @@ myApp.controller('DashboardController', function($scope, MainFactory){
     //   }
     // }
     $scope.cohorts = data;
-    $scope.cohorts.unshift({date: 'black belt'})
+    $scope.cohorts.unshift({date: 'Black Belt'})
+    $scope.title = $scope.cohorts[$scope.cohorts.length - 1];
     // counter = $scope.cohorts.length;
     console.log($scope.cohorts);
-    MainFactory.get_by_group($scope.cohorts[$scope.cohorts.length - 1], function(data){
-      $scope.students = data;
-    })
   })
 
-  function cycleGroup(arr){
+  MainFactory.get_first_group(function(data){
+    $scope.students = data;
+  })
+
+  document.onkeydown = function(e){
+    console.log(e.keyCode);
+
+    if(e.keyCode === 32){
+      cycleGroup($scope.cohorts, requestGroup);
+    }
+  }
+
+
+  function cycleGroup(arr, callback){
     var temp = arr.pop();
     arr.unshift(temp);
+    callback();
   }
+
+  function requestGroup(){
+    MainFactory.get_by_group($scope.cohorts[$scope.cohorts.length - 1], function(data){
+      console.log($scope.students);
+      $scope.students = data;
+      $scope.title = $scope.cohorts[$scope.cohorts.length - 1];
+      console.log(data);
+    })
+  };
 
 
 

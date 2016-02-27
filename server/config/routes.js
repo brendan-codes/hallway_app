@@ -37,9 +37,13 @@ module.exports = function(app){
     Cohorts.index(req, res);
   })
 
+  app.get('/cohort/first', function(req, res){
+    Students.get_first_group(req, res);
+  })
+
   app.post('/cohort/date', function(req, res){
     console.log(req.body);
-    res.end();
+    Students.get_group_by_start_date(req, res);
   })
 
   app.post('/cohort/add', function(req, res){

@@ -51,7 +51,6 @@ module.exports = (function(){
             res.json(student);
           }
         })
-
       },
       update_one_with_id: function(req, res){
         Student.update({_id: req.body._id}, req.body, function(err, student){
@@ -64,6 +63,49 @@ module.exports = (function(){
           }
         })
 
+      },
+      get_group_by_start_date: function(req, res){
+        console.log(req.body);
+        console.log('started to get groups')
+        if(req.body.date !== 'Black Belt'){
+          console.log('getting students');
+          Student.find({cohort: req.body.date}, function(err, students){
+            //console.log(!students.length);
+            if(!students.length){
+              console.log('error');
+              res.json({error: 'error'})
+            }else{
+              console.log('got students!')
+              console.log(students);
+              res.json(students);
+            }
+          })
+        }else{
+          console.log('getting black belts')
+          Student.find({black_belt: true}, function(err, students){
+            // console.log(students);
+            if(students.length < 1){
+              console.log('error');
+              res.json({error: 'error'})
+            }else{
+              console.log('got belts!')
+              res.json(students);
+            }
+          })
+        }
+      },
+      get_first_group: function(req, res){
+        Cohort.findOne({}, function(err, cohort){
+          console.log(cohort);
+          Student.find({cohort: cohort.date}, function(err, students){
+            console.log(students);
+            if(!students){
+              res.json({error: 'error'})
+            }else{
+              res.json(students);
+            }
+          })
+        })
       }
 
     }

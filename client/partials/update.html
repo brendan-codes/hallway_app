@@ -9,7 +9,7 @@
           <p ng-bind='student.name'></p>
       </div>
         <input type='text' ng-model='updated_student.name'>
-        <select ng-model='updated_student.first_stack'>
+        <select class='browser-default' ng-model='updated_student.first_stack'>
           <option value='' selected disabled>First Stack?</option>
           <option>LAMP</option>
           <option>Python</option>
@@ -17,9 +17,9 @@
           <option>Ruby on Rails</option>
           <option>MEAN</option>
         </select>
-        <select ng-model='updated_student.cohort'>
+        <select class='browser-default' ng-model='updated_student.cohort'>
           <option value='' selected disabled>Start Date</option>
-          <option ng-repeat='cohort in cohorts'>{{ cohort.date | date: MM}}</option>
+          <option ng-repeat='cohort in cohorts' value='{{cohort.date}}'>{{ cohort.date | date: MM}}</option>
         </select>
 
         <input ng-disabled='!updated_student.cohort || !updated_student.first_stack || !updated_student.name' type='submit' ng-click='updateStudent(student._id)'>
